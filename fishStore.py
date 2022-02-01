@@ -105,9 +105,5 @@ salmon_in_store = FishShop.add_fish(salmon_box)
 
 fish_list = [oseledets_box, tilapia_box,hek_box,salmon_box]
 
-find_fish = [f for f in fish_list if f.box_length == 0.7]
-for fish in find_fish:
-    print(fish.fish.name)
 FishShop.get_fish_names_sorted_by_price(fish_list)
-sorted_fish = sorted(fish_list, key  = FishShop.sort_price)
 sold = FishShop.sell_fish("hek",0.2)
