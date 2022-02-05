@@ -1,1 +1,2 @@
 # fishShop
+A program representing hierarchy in a fishshop. It consists of FishInfo class, containing name of a fish, price in uah per kilogram, origin, catch date and due date; Fish class extending FishInfo and containing age in month and weight in kg of individual fish; FishBox class aggregates FishInfo and contains information about particular fish box; FishShop class contains list of frozen and fresh fish available in store, contains methods to manipulate class members. 
