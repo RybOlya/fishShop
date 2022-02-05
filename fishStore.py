@@ -31,7 +31,7 @@ class FishBox(FishInfo):
         self.box_length = box_length
         self.is_alive = is_alive
 class FishShop(FishBox, Fish):
-    all_fish =[]
+    all_fish = []
     frozen_fish_boxes = []
     fresh_fish = []
     def add_fish(new_fish_box)->None:
@@ -45,22 +45,22 @@ class FishShop(FishBox, Fish):
         for fish_in_shop in FishShop.all_fish: 
             print(fish_in_shop.fish.name," is in the store")
             
-    def get_fish_names_sorted_by_price(fish_list) -> List[Union[str,bool,float]]:
-        sorted_fish = sorted(fish_list, key  = FishShop.sort_price)       
+    def get_fish_names_sorted_by_price() -> List[Union[str,bool,float]]:
+        sorted_fish = sorted(FishShop.all_fish, key = FishShop.sort_price)  
+        FishShop.all_fish = sorted_fish
         frozen_fish = [f for f in sorted_fish if f.is_alive is False]
         for fish in frozen_fish:
             FishShop.frozen_fish_boxes.append(fish)
-        FishShop.get_frozen_fish_names_sorted_by_price(frozen_fish)
+        FishShop.get_frozen_fish_names_sorted_by_price()
            
         alive_fish = [f for f in sorted_fish if f.is_alive is True]
         for fish in alive_fish:
             FishShop.fresh_fish.append(fish)
-        FishShop.get_fresh_fish_names_sorted_by_price(alive_fish)
-        sorted_fish = sorted(fish_list, key  = FishShop.sort_price)
+        FishShop.get_fresh_fish_names_sorted_by_price()
         FishShop.see_available()
         return (list[fish.fish.name, fish.is_alive, fish.fish.price_in_uah_per_kilo])
 
-    def get_frozen_fish_names_sorted_by_price(fish_list) -> List[Union[str,float]]:
+    def get_frozen_fish_names_sorted_by_price() -> List[Union[str,float]]:
         sorted_fish = sorted(FishShop.frozen_fish_boxes, key  = FishShop.sort_price)
         FishShop.frozen_fish_boxes = sorted_fish
         
@@ -69,7 +69,7 @@ class FishShop(FishBox, Fish):
             print(fish.fish.name, fish.fish.price_in_uah_per_kilo)
         return (list[fish.fish.name, fish.fish.price_in_uah_per_kilo])
 
-    def get_fresh_fish_names_sorted_by_price(fish_list) -> List[Union[str,float]]:
+    def get_fresh_fish_names_sorted_by_price() -> List[Union[str,float]]:
         sorted_fish = sorted(FishShop.fresh_fish, key = FishShop.sort_price)
         FishShop.fresh_fish = sorted_fish
         
@@ -79,7 +79,7 @@ class FishShop(FishBox, Fish):
         return (list[fish.fish.name, fish.fish.price_in_uah_per_kilo])
 
     def sell_fish(want_name, want_weight) -> Union[str,float,float]:
-        want_fish = [f for f in fish_list if f.fish.name is want_name]
+        want_fish = [f for f in FishShop.all_fish if f.fish.name is want_name]
         total_price = 0
         for fish in want_fish:
             if(fish.box_weight > want_weight):
@@ -89,8 +89,6 @@ class FishShop(FishBox, Fish):
         if total_price == 0:
             print("No ", want_name," in stock")
         return [want_name, want_weight, total_price]
-
-
 
 oseledets = Fish()
 tilapia = Fish("tilapia", 14.5,"Norway", datetime.date(2022,1,30), datetime.date(2022,2,2),3,0.2)
@@ -107,14 +105,7 @@ tilapia_in_store = FishShop.add_fish(tilapia_box)
 hek_in_store = FishShop.add_fish(hek_box)
 salmon_in_store = FishShop.add_fish(salmon_box)
 
-fish_list = [
-    oseledets_box, 
-    tilapia_box,
-    hek_box, 
-    salmon_box
-]
-
-FishShop.get_fish_names_sorted_by_price(fish_list)
+FishShop.get_fish_names_sorted_by_price()
 sold1 = FishShop.sell_fish("tilapia",25.2)
 sold2 = FishShop.sell_fish("oyster",0.2)
 sold3 = FishShop.sell_fish("hek",0.2)
