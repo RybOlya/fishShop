@@ -30,7 +30,7 @@ class FishBox(FishInfo):
         self.box_width = box_width
         self.box_length = box_length
         self.is_alive = is_alive
-class FishShop(FishBox, Fish):
+class FishShop():
     all_fish = []
     frozen_fish_boxes = []
     fresh_fish = []
@@ -106,6 +106,7 @@ hek_in_store = FishShop.add_fish(hek_box)
 salmon_in_store = FishShop.add_fish(salmon_box)
 
 FishShop.get_fish_names_sorted_by_price()
+
 sold1 = FishShop.sell_fish("tilapia",25.2)
 sold2 = FishShop.sell_fish("oyster",0.2)
 sold3 = FishShop.sell_fish("hek",0.2)
